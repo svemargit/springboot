@@ -10,5 +10,4 @@ public class StudentService {
     return List.of(
         new Student(1L, "Mariam", 24, LocalDate.of(1999, 2, 1), "mariam.jamal@icloud.com"));
   }
-
 }
