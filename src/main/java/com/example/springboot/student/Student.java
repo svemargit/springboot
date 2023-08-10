@@ -1,13 +1,36 @@
 package com.example.springboot.student;
 
 import java.time.LocalDate;
+import java.time.Period;
+import javax.persistence.*;
 
+@Entity
+@Table
 public class Student {
+  @Id
+  @SequenceGenerator(name = "sys_sequence", sequenceName = "sys_sequence", allocationSize = 1)
+  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sys_sequence")
   private Long id;
+
   private String name;
-  private Integer age;
+  @Transient private Integer age;
   private LocalDate dob;
   private String email;
+
+  public Student(String name, LocalDate dob, String email) {
+    this.name = name;
+    this.dob = dob;
+    this.email = email;
+  }
+
+  public Student(Long id, String name, LocalDate dob, String email) {
+    this.id = id;
+    this.name = name;
+    this.dob = dob;
+    this.email = email;
+  }
+
+  public Student() {}
 
   @Override
   public String toString() {
@@ -27,23 +50,6 @@ public class Student {
         + '}';
   }
 
-  public Student(String name, Integer age, LocalDate dob, String email) {
-    this.name = name;
-    this.age = age;
-    this.dob = dob;
-    this.email = email;
-  }
-
-  public Student(Long id, String name, Integer age, LocalDate dob, String email) {
-    this.id = id;
-    this.name = name;
-    this.age = age;
-    this.dob = dob;
-    this.email = email;
-  }
-
-  public Student() {}
-
   public Long getId() {
     return id;
   }
@@ -61,7 +67,7 @@ public class Student {
   }
 
   public Integer getAge() {
-    return age;
+    return Period.between(this.dob, LocalDate.now()).getYears();
   }
 
   public void setAge(Integer age) {
