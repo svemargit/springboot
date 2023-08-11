@@ -2,6 +2,7 @@ package com.example.springboot;
 
 import com.example.springboot.user.User;
 import com.example.springboot.user.UserRepository;
+import java.util.Optional;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -35,5 +36,17 @@ public class UserRepositoryTests {
     for (User user : users) {
       System.out.println(user.toString());
     }
+  }
+
+  @Test
+  public void testUpdate() {
+    Integer userId = 2;
+    Optional<User> optionalUser = userRepository.findById(userId);
+    User user = optionalUser.get();
+    String newPassword = "newPassword";
+    user.setPassword(newPassword);
+    userRepository.save(user);
+    User updatedUser = userRepository.findById(userId).get();
+    Assert.isTrue(updatedUser.getPassword().equals(newPassword));
   }
 }
