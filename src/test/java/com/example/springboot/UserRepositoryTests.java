@@ -56,4 +56,12 @@ public class UserRepositoryTests {
     Optional<User> optionalUser = userRepository.findById(userId);
     Assert.notNull(optionalUser);
   }
+
+  @Test
+  public void testDelete() {
+    Integer userId = 7;
+    userRepository.deleteById(userId);
+    Optional<User> optionalUser = userRepository.findById(userId);
+    Assert.isTrue(optionalUser.isEmpty());
+  }
 }
