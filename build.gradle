@@ -14,17 +14,27 @@ java {
 
 repositories {
 	mavenCentral()
+	maven { url 'https://repo.spring.io/milestone' }
+	maven { url 'https://repo.spring.io/snapshot' }
 }
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-//	runtimeOnly 'com.mysql:mysql-connector-j'
-	implementation 'mysql:mysql-connector-java:8.0.26' // Use the appropriate version
-	runtimeOnly 'org.postgresql:postgresql'
+	// DevTools dependency
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	runtimeOnly 'mysql:mysql-connector-java'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	implementation 'org.webjars:bootstrap:4.3.1'
+	implementation 'org.webjars:webjars-locator-core'
+	implementation 'mysql:mysql-connector-java:8.0.28'
 }
 
-tasks.named('test') {
+bootJar {
+	enabled = true
+}
+
+test {
 	useJUnitPlatform()
 }
