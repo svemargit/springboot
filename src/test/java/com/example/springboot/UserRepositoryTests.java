@@ -49,4 +49,11 @@ public class UserRepositoryTests {
     User updatedUser = userRepository.findById(userId).get();
     Assert.isTrue(updatedUser.getPassword().equals(newPassword));
   }
+
+  @Test
+  public void testGet() {
+    Integer userId = 2;
+    Optional<User> optionalUser = userRepository.findById(userId);
+    Assert.notNull(optionalUser);
+  }
 }
