@@ -5,46 +5,75 @@ import java.time.Period;
 import javax.persistence.*;
 
 @Entity
-@Table(name="student")
+@Table(name = "student")
 public class Student {
   @Id
-  @SequenceGenerator(name = "sys_sequence", sequenceName = "sys_sequence", allocationSize = 1)
-  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sys_sequence")
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
 
+  @Column(nullable = false, length = 15)
   private String firstName;
+
+  @Column(nullable = false, length = 15)
   private String lastName;
+
   @Transient private Integer age;
+
+  @Column(nullable = false, length = 15)
   private LocalDate dob;
+
+  @Column(nullable = false, unique = true, length = 35)
   private String email;
 
-  public Student(String firstName, String lastName, LocalDate dob, String email) {
+  private Boolean enabled;
+
+  public Boolean getEnabled() {
+    return enabled;
+  }
+
+  public void setEnabled(Boolean enabled) {
+    this.enabled = enabled;
+  }
+
+  public Student(String firstName, String lastName, LocalDate dob, String email, Boolean enabled) {
     this.firstName = firstName;
     this.lastName = lastName;
     this.dob = dob;
     this.email = email;
+    this.enabled = enabled;
   }
 
-  public Student(Integer id, String firstName, String lastName, LocalDate dob, String email) {
+  public Student(
+      Integer id, String firstName, String lastName, LocalDate dob, String email, Boolean enabled) {
     this.id = id;
     this.firstName = firstName;
     this.lastName = lastName;
     this.dob = dob;
     this.email = email;
+    this.enabled = enabled;
   }
 
   public Student() {}
 
   @Override
   public String toString() {
-    return "Student{" +
-            "id=" + id +
-            ", firstName='" + firstName + '\'' +
-            ", lastName='" + lastName + '\'' +
-            ", age=" + age +
-            ", dob=" + dob +
-            ", email='" + email + '\'' +
-            '}';
+    return "Student{"
+        + "id="
+        + id
+        + ", firstName='"
+        + firstName
+        + '\''
+        + ", lastName='"
+        + lastName
+        + '\''
+        + ", age="
+        + age
+        + ", dob="
+        + dob
+        + ", email='"
+        + email
+        + '\''
+        + '}';
   }
 
   public Integer getId() {
@@ -67,8 +96,8 @@ public class Student {
     this.firstName = firstName;
   }
 
-  public void setLastName(String firstName) {
-    this.firstName = firstName;
+  public void setLastName(String lastName) {
+    this.lastName = lastName;
   }
 
   public Integer getAge() {

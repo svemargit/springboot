@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class StudentService {
 
-  private final StudentRepository studentRepository;
+  @Autowired private final StudentRepository studentRepository;
 
   @Autowired
   public StudentService(StudentRepository studentRepository) {
@@ -45,14 +45,18 @@ public class StudentService {
             .orElseThrow(
                 () ->
                     new IllegalStateException(
-                        String.format("Student with id %dnot found.", studentId)));
-    if (firstName != null && firstName.length() > 0 && !Objects.equals(student.getFirstName(), firstName)) {
+                        String.format("Student with id %d not found.", studentId)));
+    if (firstName != null
+        && !firstName.isEmpty()
+        && !Objects.equals(student.getFirstName(), firstName)) {
       student.setFirstName(firstName);
     }
-    if (lastName != null && lastName.length() > 0 && !Objects.equals(student.getLastName(), lastName)) {
+    if (lastName != null
+        && !lastName.isEmpty()
+        && !Objects.equals(student.getLastName(), lastName)) {
       student.setLastName(lastName);
     }
-    if (email != null && email.length() > 0 && !Objects.equals(student.getEmail(), email)) {
+    if (email != null && !email.isEmpty() && !Objects.equals(student.getEmail(), email)) {
       Optional<Student> studentOptional = studentRepository.findStudentByEmail(email);
       if (studentOptional.isPresent()) {
         throw new IllegalStateException("Email taken");
