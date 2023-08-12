@@ -25,7 +25,7 @@ public class Student {
   @Column(nullable = false, unique = true, length = 35)
   private String email;
 
-  private Boolean enabled;
+  private boolean enabled;
 
   public Boolean getEnabled() {
     return enabled;
