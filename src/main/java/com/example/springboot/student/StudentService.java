@@ -29,7 +29,7 @@ public class StudentService {
     studentRepository.save(student);
   }
 
-  public void deleteStudent(Long studentId) {
+  public void deleteStudent(Integer studentId) {
     boolean exists = studentRepository.existsById(studentId);
     if (!exists) {
       throw new IllegalStateException(String.format("student with id %d not found.", studentId));
@@ -38,7 +38,7 @@ public class StudentService {
   }
 
   @Transactional
-  public void updateStudent(Long studentId, String name, String email) {
+  public void updateStudent(Integer studentId, String name, String email) {
     Student student =
         studentRepository
             .findById(studentId)

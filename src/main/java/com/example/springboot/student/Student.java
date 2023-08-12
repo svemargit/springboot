@@ -10,7 +10,7 @@ public class Student {
   @Id
   @SequenceGenerator(name = "sys_sequence", sequenceName = "sys_sequence", allocationSize = 1)
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sys_sequence")
-  private Long id;
+  private Integer id;
 
   private String name;
   @Transient private Integer age;
@@ -23,7 +23,7 @@ public class Student {
     this.email = email;
   }
 
-  public Student(Long id, String name, LocalDate dob, String email) {
+  public Student(Integer id, String name, LocalDate dob, String email) {
     this.id = id;
     this.name = name;
     this.dob = dob;
@@ -50,11 +50,11 @@ public class Student {
         + '}';
   }
 
-  public Long getId() {
+  public Integer getId() {
     return id;
   }
 
-  public void setId(Long id) {
+  public void setId(Integer id) {
     this.id = id;
   }
 
