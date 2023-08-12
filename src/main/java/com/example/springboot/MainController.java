@@ -2,8 +2,8 @@ package com.example.springboot;
 
 import com.example.springboot.student.Student;
 import com.example.springboot.student.StudentService;
-import com.example.springboot.user.User;
-import com.example.springboot.user.UserService;
+import com.example.springboot.teacher.Teacher;
+import com.example.springboot.teacher.TeacherService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class MainController {
   @Autowired private StudentService studentService;
-  @Autowired private UserService userService;
+  @Autowired private TeacherService teacherService;
 
   @GetMapping("")
   public String showHomePage() {
@@ -23,9 +23,9 @@ public class MainController {
   @GetMapping("/everyone")
   public String showEveryoneList(Model model) {
     List<Student> students = studentService.getStudents();
-    List<User> users = userService.listAll();
+    List<Teacher> teachers = teacherService.listAll();
     model.addAttribute("listStudents", students);
-    model.addAttribute("listUsers", users);
+    model.addAttribute("listTeachers", teachers);
     return "everyone";
   }
 }

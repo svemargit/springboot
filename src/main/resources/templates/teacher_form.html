@@ -9,13 +9,13 @@
 <div class="container-fluid text-center">
     <div><h2>[[${pageTitle}]]</h2></div>
     <div class="container d-flex justify-content-center">
-        <form class="col-sm-8" method="post" th:action="@{/users/save}" th:object="${user}">
+        <form class="col-sm-8" method="post" th:action="@{/teachers/save}" th:object="${teacher}">
             <input th:field="*{id}" type="hidden"/>
             <div class="border border-secondary rounded p-3">
                 <div class="form-group row">
                     <label class="col-sm-4 col-form-label">Email:</label>
                     <div class="col-sm-8">
-                        <input class="form-control" maxlength="15" minlength="8" required th:field="*{email}"
+                        <input class="form-control" maxlength="30" minlength="8" required th:field="*{email}"
                                type="email"/>
                     </div>
                 </div>
@@ -56,7 +56,7 @@
 </div>
 <script type="text/javascript">
     function cancelForm() {
-    window.location= "[[@{/users}]]"
+    window.location= "[[@{/teachers}]]"
     }
 </script>
 </body>

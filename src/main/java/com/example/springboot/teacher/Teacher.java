@@ -1,15 +1,15 @@
-package com.example.springboot.user;
+package com.example.springboot.teacher;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name = "users")
-public class User {
+@Table(name = "teachers")
+public class Teacher {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
 
-  @Column(nullable = false, unique = true, length = 15)
+  @Column(nullable = false, unique = true, length = 30)
   private String email;
 
   @Column(length = 15, nullable = false)
@@ -73,7 +73,7 @@ public class User {
 
   @Override
   public String toString() {
-    return "User{"
+    return "Teacher{"
         + "id="
         + id
         + ", email='"

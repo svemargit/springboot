@@ -2,14 +2,14 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>User management | MyApp</title>
+    <title>Teacher management | MyApp</title>
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" type="text/css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" type="text/css" >
 </head>
 <body>
 <div class="container-fluid text-center">
-    <div><h2>Manage users</h2></div>
-    <div class="m-2"><a class="h3" th:href="@{/users/new}">Add new user</a></div>
+    <div><h2>Manage teachers</h2></div>
+    <div class="m-2"><a class="h3" th:href="@{/teachers/new}">Add new teacher</a></div>
     <div class="alert alert-success text-center" th:if="${message}" id="successAlert">
         [[${message}]]
     </div>
@@ -28,14 +28,14 @@
             </tr>
             </thead>
             <tbody>
-            <th:block th:each="user : ${listUsers}">
+            <th:block th:each="teacher : ${listTeachers}">
                 <tr>
-                    <td>[[${user.email}]]</td>
-                    <td>[[${user.firstName}]]</td>
-                    <td>[[${user.lastName}]]</td>
-                    <td>[[${user.enabled}]]</td>
-                    <td><a class="h4 mr-3" th:href="@{'/users/edit/' + ${user.id}}"><i class="bi bi-pen"></i></a><a
-                            class="h4" th:href="@{'/users/delete/' + ${user.id}}"><i class="bi bi-trash"></i></a></td>
+                    <td>[[${teacher.email}]]</td>
+                    <td>[[${teacher.firstName}]]</td>
+                    <td>[[${teacher.lastName}]]</td>
+                    <td>[[${teacher.enabled}]]</td>
+                    <td><a class="h4 mr-3" th:href="@{'/teachers/edit/' + ${teacher.id}}"><i class="bi bi-pen"></i></a><a
+                            class="h4" th:href="@{'/teachers/delete/' + ${teacher.id}}"><i class="bi bi-trash"></i></a></td>
                 </tr>
             </th:block>
             </tbody>
