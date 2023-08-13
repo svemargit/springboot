@@ -3,47 +3,48 @@ package com.example.springboot.classroom;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "classroom")
 public class Classroom {
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Integer id;
+  @Column(name = "class_id")
+  private String classId;
 
-  private Integer assigned_teacher;
-  private Integer assigned_student;
-  private String class_id;
+  @Column(name = "teacher_full_name")
+  private String teacherFullName;
 
-  public Classroom() {}
+  @Column(name = "student_names")
+  private String studentNames;
 
-  public Integer getId() {
-    return id;
+  private String email;
+
+  public String getEmail() {
+    return email;
   }
 
-  public void setId(Integer id) {
-    this.id = id;
+  public void setEmail(String email) {
+    this.email = email;
   }
 
-  public Integer getAssigned_teacher() {
-    return assigned_teacher;
+  public String getClassId() {
+    return classId;
   }
 
-  public void setAssigned_teacher(Integer assigned_teacher) {
-    this.assigned_teacher = assigned_teacher;
+  public void setClassId(String classId) {
+    this.classId = classId;
   }
 
-  public Integer getAssigned_student() {
-    return assigned_student;
+  public String getTeacherFullName() {
+    return teacherFullName;
   }
 
-  public void setAssigned_student(Integer assigned_student) {
-    this.assigned_student = assigned_student;
+  public void setTeacherFullName(String teacherFullName) {
+    this.teacherFullName = teacherFullName;
   }
 
-  public String getClass_id() {
-    return class_id;
+  public String getStudentNames() {
+    return studentNames;
   }
 
-  public void setClass_id(String class_id) {
-    this.class_id = class_id;
+  public void setStudentNames(String studentNames) {
+    this.studentNames = studentNames;
   }
 }
