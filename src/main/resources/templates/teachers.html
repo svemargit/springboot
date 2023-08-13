@@ -35,10 +35,9 @@
                     <td>[[${teacher.lastName}]]</td>
                     <td>[[${teacher.enabled}]]</td>
                     <td><a class="h4 mr-3" th:href="@{'/teachers/edit/' + ${teacher.id}}"><i class="bi bi-pen"></i></a>
-                        <a
-                                class="h4" th:href="@{'/teachers/changeStatus/' + ${teacher.id} + '/true'}"><i
+                        <a class="h4 mr-3" th:href="@{'/teachers/changeStatus/' + ${teacher.id} + '/true'}"><i
                                 class="bi bi-clipboard-plus"></i></a><a
-                                class="h4" th:href="@{'/teachers/changeStatus/' + ${teacher.id} + '/false'}"><i
+                                class="h4 mr-3" th:href="@{'/teachers/changeStatus/' + ${teacher.id} + '/false'}"><i
                                 class="bi bi-clipboard-minus"></i></a></td>
                 </tr>
             </th:block>

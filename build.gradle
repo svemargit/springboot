@@ -23,7 +23,9 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
     testImplementation 'junit:junit:4.13.1'
-    // DevTools dependency
+	implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.11.2'
+	implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.8'
+	// DevTools dependency
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'mysql:mysql-connector-java'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'

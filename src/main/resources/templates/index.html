@@ -6,11 +6,23 @@
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" type="text/css">
 </head>
 <body>
-<h1>Welcome, now I will build a website.</h1>
-<div class="container fluid text-center">
-    <a class="row h2" th:href="@{/teachers}">View teachers</a>
-    <a class="row h2" th:href="@{/students}">View students</a>
-    <a class="row h2" th:href="@{/everyone}">View everyone</a>
+<div class="container-fluid text-center mt-5">
+    <h1>Welcome, now I will build a website.</h1>
+    <div class="row mt-5">
+        <div class="col">
+            <a class="h2" th:href="@{/teachers}">teachers</a>
+        </div>
+    </div>
+    <div class="row mt-5">
+        <div class="col">
+            <a class="h2" th:href="@{/students}">students</a>
+        </div>
+    </div>
+    <div class="row mt-5">
+        <div class="col">
+            <a class="h2" th:href="@{/everyone}">everyone</a>
+        </div>
+    </div>
 </div>
 </body>
 </html>
