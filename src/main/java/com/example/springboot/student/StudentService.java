@@ -1,5 +1,6 @@
 package com.example.springboot.student;
 
+import com.example.springboot.UserNotFountException;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -21,30 +22,47 @@ public class StudentService {
     return studentRepository.findAll();
   }
 
-  public void addNewStudent(Student student) {
+  public List<Student> findAllEnabled() {
+    return studentRepository.findAllByEnabled(true);
+  }
+
+  public void addNewStudent(Student student) throws UserNotFountException {
     Optional<Student> studentOptional = studentRepository.findStudentByEmail(student.getEmail());
     if (studentOptional.isPresent()) {
-      throw new IllegalStateException("Email taken");
+      throw new UserNotFountException("Email taken");
     }
+    save(student);
+  }
+
+  public void save(Student student) {
     studentRepository.save(student);
   }
 
-  public void deleteStudent(Integer studentId) {
+  public Student get(Integer studentId) throws UserNotFountException {
     boolean exists = studentRepository.existsById(studentId);
     if (!exists) {
-      throw new IllegalStateException(String.format("student with id %d not found.", studentId));
+      throw new UserNotFountException(String.format("student with id %d not found.", studentId));
+    }
+    return studentRepository.findById(studentId).get();
+  }
+
+  public void deleteStudent(Integer studentId) throws UserNotFountException {
+    boolean exists = studentRepository.existsById(studentId);
+    if (!exists) {
+      throw new UserNotFountException(String.format("student with id %d not found.", studentId));
     }
     studentRepository.deleteById(studentId);
   }
 
   @Transactional
-  public void updateStudent(Integer studentId, String firstName, String lastName, String email) {
+  public void updateStudent(Integer studentId, String firstName, String lastName, String email)
+      throws UserNotFountException {
     Student student =
         studentRepository
             .findById(studentId)
             .orElseThrow(
                 () ->
-                    new IllegalStateException(
+                    new UserNotFountException(
                         String.format("Student with id %d not found.", studentId)));
     if (firstName != null
         && !firstName.isEmpty()
@@ -59,7 +77,7 @@ public class StudentService {
     if (email != null && !email.isEmpty() && !Objects.equals(student.getEmail(), email)) {
       Optional<Student> studentOptional = studentRepository.findStudentByEmail(email);
       if (studentOptional.isPresent()) {
-        throw new IllegalStateException("Email taken");
+        throw new UserNotFountException("Email taken");
       }
       student.setEmail(email);
     }

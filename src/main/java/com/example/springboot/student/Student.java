@@ -19,8 +19,26 @@ public class Student {
 
   @Transient private Integer age;
 
-  @Column(nullable = false, length = 15)
+  @Column(nullable = true, length = 15)
   private LocalDate dob;
+
+  private String dateOfBirth;
+
+  public String getDateOfBirth() {
+    return dateOfBirth;
+  }
+
+  public void setDateOfBirth(String dateOfBirth) {
+    this.dateOfBirth = dateOfBirth;
+  }
+
+  public boolean isEnabled() {
+    return enabled;
+  }
+
+  public void setEnabled(boolean enabled) {
+    this.enabled = enabled;
+  }
 
   @Column(nullable = false, unique = true, length = 35)
   private String email;

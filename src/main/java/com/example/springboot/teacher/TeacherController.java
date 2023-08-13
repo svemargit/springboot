@@ -1,5 +1,6 @@
 package com.example.springboot.teacher;
 
+import com.example.springboot.UserNotFountException;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,7 +16,7 @@ public class TeacherController {
 
   @GetMapping("/teachers")
   public String showTeacherList(Model model) {
-    List<Teacher> listTeachers = teacherService.listAll();
+    List<Teacher> listTeachers = teacherService.getTeachers();
     model.addAttribute("listTeachers", listTeachers);
     return "teachers";
   }
@@ -42,10 +43,31 @@ public class TeacherController {
       model.addAttribute("teacher", teacher);
       model.addAttribute("pageTitle", "Edit teacher by id " + id);
       return "teacher_form";
-    } catch (TeacherNotFoundException e) {
+    } catch (UserNotFountException e) {
       redirectAttributes.addFlashAttribute("message", "The teacher has been saved sucesfully");
       return "redirect:/teachers";
     }
+  }
+
+  @GetMapping("/teachers/changeStatus/{id}/{enabled}")
+  public String changeTeacherStatus(
+      @PathVariable("id") Integer id,
+      @PathVariable("enabled") boolean enabled,
+      RedirectAttributes redirectAttributes) {
+    try {
+      Teacher teacher = teacherService.get(id);
+      teacher.setEnabled(enabled);
+      teacherService.save(teacher);
+      String message =
+          enabled
+              ? "The teacher has been hired successfully"
+              : "The teacher has been fired successfully";
+      String warning = enabled ? "message" : "alert";
+      redirectAttributes.addFlashAttribute(warning, message);
+    } catch (UserNotFountException e) {
+      redirectAttributes.addFlashAttribute("alert", e.getMessage());
+    }
+    return "redirect:/teachers";
   }
 
   @GetMapping("/teachers/delete/{id}")
@@ -54,7 +76,7 @@ public class TeacherController {
     try {
       teacherService.delete(id);
       redirectAttributes.addFlashAttribute("alert", "The teacher has been deleted sucesfully");
-    } catch (TeacherNotFoundException e) {
+    } catch (UserNotFountException e) {
       redirectAttributes.addFlashAttribute("alert", e.getMessage());
     }
     return "redirect:/teachers";

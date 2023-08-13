@@ -1,10 +1,7 @@
 package com.example.springboot;
 
-import com.example.springboot.student.Student;
 import com.example.springboot.student.StudentService;
-import com.example.springboot.teacher.Teacher;
 import com.example.springboot.teacher.TeacherService;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,10 +19,10 @@ public class MainController {
 
   @GetMapping("/everyone")
   public String showEveryoneList(Model model) {
-    List<Student> students = studentService.getStudents();
-    List<Teacher> teachers = teacherService.listAll();
-    model.addAttribute("listStudents", students);
-    model.addAttribute("listTeachers", teachers);
+    model.addAttribute("listStudents", studentService.getStudents());
+    model.addAttribute("listTeachers", teacherService.getTeachers());
+    model.addAttribute("listEnabledStudents", studentService.findAllEnabled());
+    model.addAttribute("listEnabledTeachers", teacherService.findAllByEnabled());
     return "everyone";
   }
 }
